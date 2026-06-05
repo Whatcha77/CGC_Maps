@@ -5,7 +5,7 @@
 <title>Carte FTTH</title>
 
 <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"/>
-://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+<script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
 
 <style>
 #map { height: 100vh; }
@@ -18,13 +18,15 @@
 
 <script>
 
+// Carte centrée Luxembourg
 var map = L.map('map').setView([49.75, 6.1], 9);
 
+// Fond OpenStreetMap
 L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
-    maxZoom: 19,
+    maxZoom: 19
 }).addTo(map);
 
-// ✅ Colle ici TON CSV converti
+// Exemple POP (tu peux remplacer après)
 var pops = [
 ["FO-POP144 (CT44)",49.60686,6.10303],
 ["FO-POP136 (CT36)",49.56490,6.16266],
@@ -37,6 +39,7 @@ var pops = [
 ["FO-POP231 (CT31)",49.62000,6.07000]
 ];
 
+// Ajout des points
 pops.forEach(function(pop){
     L.marker([pop[1], pop[2]])
         .addTo(map)
