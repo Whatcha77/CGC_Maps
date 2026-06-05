@@ -18,32 +18,35 @@
 
 <script>
 
-// Carte centrée Luxembourg
 var map = L.map('map').setView([49.75, 6.1], 9);
 
-// Fond OpenStreetMap
 L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
     maxZoom: 19
 }).addTo(map);
 
-// Exemple POP (tu peux remplacer après)
-var pops = [
-["FO-POP144 (CT44)",49.60686,6.10303],
-["FO-POP136 (CT36)",49.56490,6.16266],
-["FO-POP151 (CT51)",49.49345,6.08577],
-["FO-POP150 (CT50)",49.51769,5.89118],
-["FO-POP159 (CT59)",49.51576,5.93530],
-["FO-POP169 (CT69)",49.54307,6.36866],
-["FO-POP143 (CT43)",49.62290,6.14724],
-["FO-POP130 (CT30)",49.67125,6.03985],
-["FO-POP231 (CT31)",49.62000,6.07000]
-];
+// 🔥 Charger le CSV automatiquement
+fetch('FO_POP_GPS.csv')
+.then(response => response.text())
+.then(data => {
 
-// Ajout des points
-pops.forEach(function(pop){
-    L.marker([pop[1], pop[2]])
-        .addTo(map)
-        .bindPopup(pop[0]);
+    var rows = data.split("\\n");
+
+    rows.slice(1).forEach(function(row){
+
+        var cols = row.split(",");
+
+        if(cols.length < 3) return;
+
+        var name = cols[0];
+        var lat = parseFloat(cols[1]);
+        var lon = parseFloat(cols[2]);
+
+        if(!isNaN(lat) && !isNaN(lon)){
+            L.marker([lat, lon])
+                .addTo(map)
+                .bindPopup(name);
+        }
+    });
 });
 
 </script>
