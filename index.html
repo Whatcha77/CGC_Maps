@@ -56,7 +56,10 @@ fetch('FO_POP_GPS.csv')
         if(!isNaN(lat) && !isNaN(lon)){
             L.marker([lat, lon])
                 .addTo(map)
-                .bindPopup(name);
+                .bindPopup(name)
+                .bindTooltip(name, {
+                    permanent: false
+                });
         }
     });
 
