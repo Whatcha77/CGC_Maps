@@ -55,11 +55,14 @@ fetch('FO_POP_GPS.csv')
 
         if(!isNaN(lat) && !isNaN(lon)){
             L.marker([lat, lon])
-                .addTo(map)
-                .bindPopup(name)
-                .bindTooltip(name, {
-                    permanent: false
-                });
+    .addTo(map)
+    .bindPopup(name)
+    .bindTooltip(name, {
+        permanent: true,
+        direction: "top",
+        offset: [0, -5]
+    });
+
         }
     });
 
