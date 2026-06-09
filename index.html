@@ -24,12 +24,24 @@ L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
     maxZoom: 19
 }).addTo(map);
 
-// 🔥 Charger le CSV automatiquement
+
+// ✅ Test fetch + debug
 fetch('./FO_POP_GPS.csv')
-.then(response => return response.text();)
+.then(response => {
+
+    console.log("Status:", response.status);
+
+    if (!response.ok) {
+        throw new Error("CSV pas accessible !");
+    }
+
+    return response.text();
+})
 .then(data => {
 
-    var rows = data.split("\\n");
+    console.log("CSV OK");
+
+    var rows = data.split("\n");
 
     rows.slice(1).forEach(function(row){
 
@@ -47,6 +59,11 @@ fetch('./FO_POP_GPS.csv')
                 .bindPopup(name);
         }
     });
+
+})
+.catch(err => {
+    console.error(err);
+    alert(err.message);
 });
 
 </script>
