@@ -55,7 +55,7 @@ fetch('FO_POP_GPS.csv')
         var adresse = cols[3];
 
 
-        
+    if(!isNaN(lat) && !isNaN(lon)){
     var marker = L.marker([lat, lon]).addTo(map);
 
     // ✅ popup (clic)
@@ -66,9 +66,8 @@ fetch('FO_POP_GPS.csv')
         permanent: true,
         direction: "top",
         offset: [0, -5]
-
-        //if(!isNaN(lat) && !isNaN(lon)){
-        //    L.marker([lat, lon])
+    
+    //    L.marker([lat, lon])
     //.addTo(map)
     //.bindPopup(name)
     //.bindTooltip(name, {
