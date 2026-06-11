@@ -7,8 +7,18 @@
 <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"/>
 <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
 
+<!-- 🔍 Recherche (géocoder) -->
+<link rel="stylesheet" href="https://unpkg.com/leaflet-control-geocoder/dist/Control.Geocoder.css"/>
+<script src="https://unpkg.com/leaflet-control-geocoder/dist/Control.Geocoder.js"></script>
+
 <style>
 #map { height: 100vh; }
+
+.leaflet-tooltip {
+    font-size: 10px;
+    background: white;
+    border: 1px solid black;
+}
 </style>
 
 </head>
@@ -18,28 +28,24 @@
 
 <script>
 
+// ✅ Carte
 var map = L.map('map').setView([49.75, 6.1], 9);
 
-L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+// ✅ Fond
+var osm = L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
     maxZoom: 19
 }).addTo(map);
 
 
-// ✅ Test fetch + debug
+// ✅ LAYERS
+var fo_pop_layer = L.layerGroup();
+var fibres_layer = L.layerGroup();
+
+
+// ✅ Charger CSV FO_POP
 fetch('FO_POP_GPS.csv')
-.then(response => {
-
-    console.log("Status:", response.status);
-
-    if (!response.ok) {
-        throw new Error("CSV pas accessible !");
-    }
-
-    return response.text();
-})
+.then(res => res.text())
 .then(data => {
-
-    console.log("CSV OK");
 
     var rows = data.split("\n");
 
@@ -47,64 +53,87 @@ fetch('FO_POP_GPS.csv')
 
         var cols = row.split(",");
 
-        if(cols.length < 3) return;
+        if(cols.length < 4) return;
 
         var name = cols[0];
         var lat = parseFloat(cols[1]);
         var lon = parseFloat(cols[2]);
         var adresseBrute = cols[3];
 
-    // ✅ regex simple pour réorganiser adresse
+        if(isNaN(lat) || isNaN(lon)) return;
+
+        // ✅ Format adresse
         var match = adresseBrute.match(/(.+?)\s(\d+\w*)\s(L-\d+\s.+)/);
-        
-        var adresse;
 
-        if (match) {
-            var rue = match[1];
-            var numero = match[2];
-            var ville = match[3];
+        var adresse = adresseBrute;
 
-            adresse = numero + " " + rue + ", " + ville;
-} else {
-        // fallback si format différent
-        adresse = adresseBrute;
-}
-``
-
-
-    if(!isNaN(lat) && !isNaN(lon)){
-    var marker = L.marker([lat, lon]).addTo(map);
-
-    // ✅ popup (clic)
-    marker.bindPopup(`
-    <b>${name}</b><br>
-    <span style="font-size:12px;color:gray">${adresse}</span>
-`);
-``
-
-    // ✅ label (visible)
-    marker.bindTooltip(name, {
-        permanent: true,
-        direction: "top",
-        offset: [0, -5]
-    
-    //    L.marker([lat, lon])
-    //.addTo(map)
-    //.bindPopup(name)
-    //.bindTooltip(name, {
-    //    permanent: true,
-    //    direction: "top",
-    //    offset: [0, -5]
-    });
-
+        if(match){
+            adresse = match[2] + " " + match[1] + ", " + match[3];
         }
+
+        var marker = L.marker([lat, lon]);
+
+        marker.bindPopup(`
+            <b>${name}</b><br>
+            <span style="color:gray">${adresse}</span>
+        `);
+
+        marker.bindTooltip(name, {
+            permanent: false,
+            direction: "top"
+        });
+
+        fo_pop_layer.addLayer(marker);
     });
 
-})
-.catch(err => {
+}).catch(err => {
     console.error(err);
-    alert(err.message);
 });
+
+
+// ✅ Exemple fibre (à remplacer par ton KMZ après)
+var fibre1 = [
+    [49.60667,6.10311],
+    [49.60678,6.10303],
+    [49.60684,6.10278],
+    [49.60665,6.10217]
+];
+
+L.polyline(fibre1, {
+    color: 'red',
+    weight: 4
+}).addTo(fibres_layer);
+
+
+// ✅ Ajout des layers au contrôle
+var baseMaps = {
+    "OSM": osm
+};
+
+var overlayMaps = {
+    "FO POP": fo_pop_layer,
+    "Fibres": fibres_layer
+};
+
+L.control.layers(baseMaps, overlayMaps).addTo(map);
+
+
+// ✅ Activer FO_POP par défaut
+fo_pop_layer.addTo(map);
+
+
+
+
+// 🔍 ✅ SEARCH (comme dans ton code original)
+L.Control.geocoder({
+    defaultMarkGeocode: true
+})
+.on('markgeocode', function(e) {
+    map.setView(e.geocode.center, 14);
+})
+.addTo(map);
+
+
 
 </script>
 
