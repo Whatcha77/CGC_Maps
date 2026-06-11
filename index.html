@@ -55,8 +55,8 @@ fetch('FO_POP_GPS.csv')
         var adresseBrute = cols[3];
 
     // ✅ regex simple pour réorganiser adresse
-        var match = adresseBrute.match(/(.+)\s(\d+)\s(L-\d+\s.+)/);
-
+        var match = adresseBrute.match(/(.+?)\s(\d+\w*)\s(L-\d+\s.+)/);
+        
         var adresse;
 
         if (match) {
