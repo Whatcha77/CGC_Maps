@@ -52,14 +52,35 @@ fetch('FO_POP_GPS.csv')
         var name = cols[0];
         var lat = parseFloat(cols[1]);
         var lon = parseFloat(cols[2]);
-        var adresse = cols[3];
+        var adresseBrute = cols[3];
+
+    // ✅ regex simple pour réorganiser adresse
+        var match = adresseBrute.match(/(.+)\s(\d+)\s(L-\d+\s.+)/);
+
+        var adresse;
+
+        if (match) {
+            var rue = match[1];
+            var numero = match[2];
+            var ville = match[3];
+
+            adresse = numero + " " + rue + ", " + ville;
+} else {
+        // fallback si format différent
+        adresse = adresseBrute;
+}
+``
 
 
     if(!isNaN(lat) && !isNaN(lon)){
     var marker = L.marker([lat, lon]).addTo(map);
 
     // ✅ popup (clic)
-    marker.bindPopup("<b>" + name + "</b><br>" + adresse);
+    marker.bindPopup(`
+    <b>${name}</b><br>
+    <span style="font-size:12px;color:gray">${adresse}</span>
+`);
+``
 
     // ✅ label (visible)
     marker.bindTooltip(name, {
