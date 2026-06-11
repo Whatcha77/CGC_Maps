@@ -53,12 +53,17 @@ fetch('FO_POP_GPS.csv')
 
         var cols = row.split(",");
 
-        if(cols.length < 4) return;
+        if(cols.length < 5) return;
 
         var name = cols[0];
         var lat = parseFloat(cols[1]);
         var lon = parseFloat(cols[2]);
-        var adresseBrute = cols[3];
+        var adresseRue = cols[3];
+        var adresseCode = cols[4];
+        // reconstruire adresse complète
+        var adresse = adresseRue + ", " + adresseCode;
+
+
 
         if(isNaN(lat) || isNaN(lon)) return;
 
