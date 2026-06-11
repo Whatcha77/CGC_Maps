@@ -52,6 +52,7 @@ fetch('FO_POP_GPS.csv')
         var name = cols[0];
         var lat = parseFloat(cols[1]);
         var lon = parseFloat(cols[2]);
+        var adresse = cols[3];
 
         if(!isNaN(lat) && !isNaN(lon)){
             L.marker([lat, lon])
