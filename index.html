@@ -54,14 +54,27 @@ fetch('FO_POP_GPS.csv')
         var lon = parseFloat(cols[2]);
         var adresse = cols[3];
 
-        if(!isNaN(lat) && !isNaN(lon)){
-            L.marker([lat, lon])
-    .addTo(map)
-    .bindPopup(name)
-    .bindTooltip(name, {
+
+        
+    var marker = L.marker([lat, lon]).addTo(map);
+
+    // ✅ popup (clic)
+    marker.bindPopup("<b>" + name + "</b><br>" + adresse);
+
+    // ✅ label (visible)
+    marker.bindTooltip(name, {
         permanent: true,
         direction: "top",
         offset: [0, -5]
+
+        //if(!isNaN(lat) && !isNaN(lon)){
+        //    L.marker([lat, lon])
+    //.addTo(map)
+    //.bindPopup(name)
+    //.bindTooltip(name, {
+    //    permanent: true,
+    //    direction: "top",
+    //    offset: [0, -5]
     });
 
         }
