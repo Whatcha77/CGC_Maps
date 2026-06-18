@@ -1,15 +1,25 @@
 name,lat,lon,adresseRue,adresseCode
-xFO-POP134 (CT34),49.70595,6.21717,3 Chaussée St. Martin, L-6960 Senningen
-xFO-POP1218,49.91437,5.90672,6D Am Clemensbongert, L-9158 Heiderscheid
-xFO-POP1219,49.62804,6.12077,1A Rue Joseph Hess, L-1732 Luxembourg
-xFO-POP144 (CT44),49.60686,6.10303,1 Rue Yolande, L-2761 Luxembourg
-xFO-POP1129,49.57534,6.11835,Rue d'Itzig, L-5852 Hesperange
-xFO-POP156 (CT56),49.48435,5.98378,9 Rue Thomas Byrne, L-3761 Tetange
-xFO-POP169 (CT69),49.54307,6.36866,3 Place Nico Klopp, L-5539 Remich
-xFO-POP1231,49.61550,6.06987,28 Rue de Strassen, L-8094 Bertrange
-xFO-POP1267,49.52213,6.27885,21 Draikantonstrooss, L-5687 Dalheim
-xFO-POP150 (CT50),49.51769,5.89118,13 Avenue de la Gare, L-4734 Petange
-xFO-POP159 (CT59),49.51576,5.93530,168 Rue de Soleuvre, L-4487 Belvaux
+FO-POP134 (CT34),49.64930121,6.24152666,3 Chaussée St. Martin, L-6960 Senningen
+FO-POP1218	49.88463776	5.9847936	6D Am Clemensbongert	 L-9158 Heiderscheid
+FO-POP1219	49.63385106	6.16583674	1A Rue Joseph Hess	 L-1732 Luxembourg
+FO-POP144 (CT44)	49.60668423	6.10302882	1 Rue Yolande	 L-2761 Luxembourg
+FO-POP1129	49.57989059	6.16488679	Rue d'Itzig	 L-5852 Hesperange
+FO-POP156 (CT56)	49.47553018	6.03993068	9 Rue Thomas Byrne	 L-3761 Tetange
+FO-POP169 (CT69)	49.54657154	6.36131445	3 Place Nico Klopp	 L-5539 Remich
+FO-POP1231	49.61484825	6.06243749	28 Rue de Strassen	 L-8094 Bertrange
+FO-POP1267	49.54051505	6.26785754	21 Draikantonstrooss	 L-5687 Dalheim
+FO-POP150 (CT50)	49.55509386	5.87687934	13 Avenue de la Gare	 L-4734 Petange
+FO-POP159 (CT59)	49.51584228	5.93549527	168 Rue de Soleuvre	 L-4487 Belvaux
+FO-POP139 (CT39)	49.65989663	5.91581043	7 Rue de Luxembourg	 L-8440 Steinfort
+FO-POP136 (CT36)	49.56480175	6.16257496	483 Route de Thionville	 L-5887 Alzingen
+FO-POP151 (CT51)	49.49340658	6.08586883	250 Route de Burange	 L-3429 Dudelange
+FO-POP143 (CT43)	49.61824107	6.14464968	2 Rue du Fort Thuengen	 L-1499 Luxembourg
+FO-POP130 (CT30)	49.66850078	6.03028029	24 Rue d'Olm	 L-8281 Kehlen
+FO-POP153 (CT53)	49.49259967	5.98081692	9 Rue Xavier Brasseur	 L-4040 Esch-sur-Alzette
+FO-POP133 (CT33)	49.6693447	6.13564155	81 Rue de Luxembourg	 L-7330 Heisdorf
+FO-POP135 (CT35)	49.60137597	6.25842665	4A Montée d'Oetrange	 L-5351 Oetrange
+FO-POP237 (CT37)	49.55309284	6.01247959	RN13 Ehlange-Reckange	 L-4980 Reckange-sur-Mess
+
 
 
 FO-POP134 (CT34),49.64930121,6.24152666,3 Chaussée St. Martin, L-6960 Senningen
