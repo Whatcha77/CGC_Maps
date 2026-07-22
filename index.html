@@ -47,7 +47,6 @@ var searchLayer = L.layerGroup();
 var fo_pop_layer = L.layerGroup();
 var fibres_layer = L.layerGroup();
 var cgc_pop_layer = L.layerGroup();
-var searchLayer = L.layerGroup();
     
 
 // ✅ Charger CSV FO_POP
@@ -70,6 +69,11 @@ fetch('FO_POP_GPS.csv')
         var adresseCode = cols[4];
         // reconstruire adresse complète
         var adresseBrute = adresseRue + ", " + adresseCode;
+        
+        var recherche =
+            name + " " +
+            adresseRue + " " +
+            adresseCode;
 
 
 
@@ -103,7 +107,7 @@ fetch('FO_POP_GPS.csv')
         });
 
         fo_pop_layer.addLayer(marker);
-        marker.options.title = name;
+        marker.options.title = recherche;
         searchLayer.addLayer(marker);
 
     });
@@ -133,6 +137,14 @@ fetch('CGC_POP_GPS_01.csv')
         // reconstruire adresse complète
         var adresseBrute = adresseRue + ", " + adresseCode;
 
+        var recherche =
+            name + " " +
+            adresseRue + " " +
+            adresseCode;
+        
+
+
+        
         if(isNaN(lat) || isNaN(lon)) return;
         
         // ✅ Format adresse
@@ -165,7 +177,7 @@ fetch('CGC_POP_GPS_01.csv')
         });
 
         cgc_pop_layer.addLayer(marker);
-        marker.options.title = name;
+        marker.options.title = recherche;
         searchLayer.addLayer(marker);
 
 
