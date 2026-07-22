@@ -107,7 +107,12 @@ fetch('FO_POP_GPS.csv')
         });
 
         fo_pop_layer.addLayer(marker);
-        marker.options.title = recherche;
+        marker.feature = {
+            properties: {
+                title: recherche
+            }
+        };
+        console.log(recherche);
         searchLayer.addLayer(marker);
         console.log(searchLayer.getLayers().length);
 
@@ -181,8 +186,14 @@ fetch('CGC_POP_GPS_01.csv')
         });
 
         cgc_pop_layer.addLayer(marker);
-        marker.options.title = recherche;
+        marker.feature = {
+            properties: {
+                title: recherche
+            }
+        };
+        console.log(recherche);
         searchLayer.addLayer(marker);
+        console.log(searchLayer.getLayers().length);
 
 
     });
@@ -251,8 +262,8 @@ function initSearch(){
     var searchControl = new L.Control.Search({
         layer: searchLayer,
         propertyName: 'title',
+        textPlaceholder: 'Rechercher un site...',
         zoom: 16,
-        initial: false,
         marker: false
     });
 
