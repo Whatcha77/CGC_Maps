@@ -11,6 +11,9 @@
 <link rel="stylesheet" href="https://unpkg.com/leaflet-control-geocoder/dist/Control.Geocoder.css"/>
 <script src="https://unpkg.com/leaflet-control-geocoder/dist/Control.Geocoder.js"></script>
 
+<link rel="stylesheet" href="https://unpkg.com/leaflet-search@3.0.9/dist/leaflet-search.min.css">
+
+
 <style>
 #map { height: 100vh; }
 
@@ -96,6 +99,8 @@ fetch('FO_POP_GPS.csv')
         });
 
         fo_pop_layer.addLayer(marker);
+        marker.options.title = name;
+        searchLayer.addLayer(marker);
     });
 
 }).catch(err => {
@@ -155,6 +160,8 @@ fetch('CGC_POP_GPS_01.csv')
         });
 
         cgc_pop_layer.addLayer(marker);
+        marker.options.title = name;
+        searchLayer.addLayer(marker);
 
     });
 
@@ -188,7 +195,15 @@ var overlayMaps = {
 };
 
 L.control.layers(baseMaps, overlayMaps).addTo(map);
+var searchControl = new L.Control.Search({
+    layer: searchLayer,
+    propertyName: 'title',
+    zoom: 16,
+    initial: false,
+    marker: false
+});
 
+map.addControl(searchControl);
 
 // ✅ Activer FO_POP par défaut
 fo_pop_layer.addTo(map);
