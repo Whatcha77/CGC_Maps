@@ -259,6 +259,11 @@ function initSearch(){
     console.log("FO + CGC chargés");
     console.log("Objets recherche :", searchLayer.getLayers().length);
 
+    // DEBUG
+    searchLayer.eachLayer(function(layer){
+        console.log(layer.feature);
+    });
+    
     var searchControl = new L.Control.Search({
         layer: searchLayer,
         propertyName: 'title',
