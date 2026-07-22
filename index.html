@@ -120,9 +120,21 @@ fetch('CGC_POP_GPS_01.csv')
         var lon = parseFloat(cols[2]);
         var adresseRue = cols[3];
         var adresseCode = cols[4];
+        // reconstruire adresse complète
+        var adresseBrute = adresseRue + ", " + adresseCode;
 
         if(isNaN(lat) || isNaN(lon)) return;
+        
+        // ✅ Format adresse
+        var match = adresseBrute.match(/(.+?)\s(\d+\w*)\s(L-\d+\s.+)/);
 
+        var adresse = adresseBrute;
+
+        if(match){
+            adresse = match[2] + " " + match[1] + ", " + match[3];
+        }
+
+        
         var marker = L.circleMarker([lat, lon], {
             radius: 6,
             color: "#cc0000",
