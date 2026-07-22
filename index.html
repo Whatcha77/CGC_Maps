@@ -11,7 +11,7 @@
 <link rel="stylesheet" href="https://unpkg.com/leaflet-control-geocoder/dist/Control.Geocoder.css"/>
 <script src="https://unpkg.com/leaflet-control-geocoder/dist/Control.Geocoder.js"></script>
 
-
+<link rel="stylesheet" href="https://unpkg.com/leaflet-search@3.0.9/dist/leaflet-search.min.css"/>
 
 <style>
 #map { height: 100vh; }
@@ -43,7 +43,8 @@ var osm = L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
 var fo_pop_layer = L.layerGroup();
 var fibres_layer = L.layerGroup();
 var cgc_pop_layer = L.layerGroup();
-
+var searchLayer = L.layerGroup();
+    
 
 // ✅ Charger CSV FO_POP
 fetch('FO_POP_GPS.csv')
@@ -158,8 +159,7 @@ fetch('CGC_POP_GPS_01.csv')
         });
 
         cgc_pop_layer.addLayer(marker);
-        marker.options.title = name;
-        searchLayer.addLayer(marker);
+
 
     });
 
