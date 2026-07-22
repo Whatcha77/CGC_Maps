@@ -111,7 +111,10 @@ fetch('FO_POP_GPS.csv')
         searchLayer.addLayer(marker);
 
     });
-
+    
+csvLoaded++;
+initSearch();
+    
 }).catch(err => {
     console.error(err);
 });
@@ -183,6 +186,9 @@ fetch('CGC_POP_GPS_01.csv')
 
     });
 
+csvLoaded++;
+initSearch();
+    
 });
 
 
@@ -213,16 +219,8 @@ var overlayMaps = {
 };
 
 L.control.layers(baseMaps, overlayMaps).addTo(map);
-var searchControl = new L.Control.Search({
-    layer: searchLayer,
-    propertyName: 'title',
-    zoom: 16,
-    initial: false,
-    marker: false
-});
+var csvLoaded = 0;
 
-console.log(searchLayer.getLayers().length);
-map.addControl(searchControl);
 
 
 // ✅ Activer FO_POP par défaut
@@ -241,7 +239,24 @@ L.Control.geocoder({
 })
 .addTo(map);
 
+function initSearch(){
 
+    if(csvLoaded < 2)
+        return;
+
+    console.log("FO + CGC chargés");
+    console.log("Objets recherche :", searchLayer.getLayers().length);
+
+    var searchControl = new L.Control.Search({
+        layer: searchLayer,
+        propertyName: 'title',
+        zoom: 16,
+        initial: false,
+        marker: false
+    });
+
+    map.addControl(searchControl);
+}
 
 </script>
 
