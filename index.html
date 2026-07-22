@@ -11,7 +11,10 @@
 <link rel="stylesheet" href="https://unpkg.com/leaflet-control-geocoder/dist/Control.Geocoder.css"/>
 <script src="https://unpkg.com/leaflet-control-geocoder/dist/Control.Geocoder.js"></script>
 
-<link rel="stylesheet" href="https://unpkg.com/leaflet-search@3.0.9/dist/leaflet-search.min.css"/>
+<link rel="stylesheet" href="https://unpkg.com/leaflet-search@3.0.9/dist/leaflet-search.min.css">
+<script src="https://unpkg.com/leaflet-search@3.0.9/dist/leaflet-search.min.js"></script>
+
+
 
 <style>
 #map { height: 100vh; }
@@ -40,6 +43,7 @@ var osm = L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
 
 
 // ✅ LAYERS
+var searchLayer = L.layerGroup();
 var fo_pop_layer = L.layerGroup();
 var fibres_layer = L.layerGroup();
 var cgc_pop_layer = L.layerGroup();
@@ -99,6 +103,8 @@ fetch('FO_POP_GPS.csv')
         });
 
         fo_pop_layer.addLayer(marker);
+        marker.options.title = name;
+        searchLayer.addLayer(marker);
 
     });
 
@@ -159,6 +165,8 @@ fetch('CGC_POP_GPS_01.csv')
         });
 
         cgc_pop_layer.addLayer(marker);
+        marker.options.title = name;
+        searchLayer.addLayer(marker);
 
 
     });
@@ -193,6 +201,15 @@ var overlayMaps = {
 };
 
 L.control.layers(baseMaps, overlayMaps).addTo(map);
+var searchControl = new L.Control.Search({
+    layer: searchLayer,
+    propertyName: 'title',
+    zoom: 16,
+    initial: false,
+    marker: false
+});
+
+map.addControl(searchControl);
 
 
 // ✅ Activer FO_POP par défaut
