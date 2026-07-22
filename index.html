@@ -109,7 +109,6 @@ fetch('FO_POP_GPS.csv')
         fo_pop_layer.addLayer(marker);
         marker.options.title = recherche;
         searchLayer.addLayer(marker);
-        console.log("Ajout recherche :", recherche);
 
     });
 
@@ -180,7 +179,6 @@ fetch('CGC_POP_GPS_01.csv')
         cgc_pop_layer.addLayer(marker);
         marker.options.title = recherche;
         searchLayer.addLayer(marker);
-        console.log("Ajout recherche :", recherche);
 
 
     });
@@ -223,6 +221,7 @@ var searchControl = new L.Control.Search({
     marker: false
 });
 
+console.log(searchLayer.getLayers().length);
 map.addControl(searchControl);
 
 
